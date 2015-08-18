@@ -5,3 +5,64 @@
  */
 
 include_once 'loop_frontpage.features.inc';
+
+function loop_frontpage_block_view($delta = '') {
+    $block = array();
+    switch ($delta) {
+        case 'loop_frontpage_welcometext':
+            $variables = array('text' => variable_get('frontpage_welcometext'));
+            $block['content'] = theme('loop_frontpage_welcometext', $variables);
+            break;
+    }
+    return $block;
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function loop_frontpage_block_info() {
+    return array(
+        'loop_frontpage_welcometext' => array(
+            'info' => t('Frontpage welcometext'),
+            'cache' => DRUPAL_CACHE_GLOBAL,
+        ),
+    );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function loop_frontpage_theme() {
+    return array(
+        'loop_frontpage_welcometext' => array(
+            'variables' => array(
+                'text' => ''
+            ),
+            'template' => 'templates/welcometext',
+        ),
+    );
+}
+
+function loop_frontpage_block_configure($delta = '') {
+    // This example comes from node.module.
+    $form = array();
+    if ($delta == 'loop_frontpage_welcometext') {
+        $form['text'] = array(
+            '#type' => 'textarea',
+            '#title' => t('Welcome text'),
+            '#default_value' => variable_get('frontpage_welcometext', ''),
+        );
+    }
+    return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function loop_frontpage_block_save($delta = '', $edit = array()) {
+    switch ($delta) {
+        case 'loop_frontpage_welcometext':
+            variable_set('frontpage_welcometext', $edit['text']);
+            break;
+    }
+}
