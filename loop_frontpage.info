@@ -16,4 +16,4 @@ features[features_api][] = api:2
 features[page_manager_pages][] = loop_frontpage
 features[variable][] = frontpage_welcometext
 features[variable][] = site_frontpage
-mtime = 1439890087
+mtime = 1439891650
