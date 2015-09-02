@@ -8,4 +8,6 @@
  * - $text: The complete text ready for print.
  */
 ?>
-<div class="welcometext"><?php print $text; ?></div>
+<div class="layout--inner">
+	<div class="welcometext"><?php print $text; ?></div>
+</div>
